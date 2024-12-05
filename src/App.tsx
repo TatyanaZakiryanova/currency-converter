@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ChangeEvent, useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+type Currency = 'USD' | 'EUR' | 'RUB';
+
+const exchangeRates: Record<Currency, number> = {
+  USD: 1.06,
+  EUR: 1,
+  RUB: 100,
+};
+
+const App = () => {
+  const [amount, setAmount] = useState<number>(1);
+  const [fromCurrency, setFromCurrency] = useState<Currency>('USD');
+  const [toCurrency, setToCurrency] = useState<Currency>('EUR');
+
+  const handleAmountInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setAmount(parseFloat(e.target.value));
+  };
+
+  const handleFromCurrencySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFromCurrency(e.target.value as Currency);
+  };
+
+  const handleToCurrencySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setToCurrency(e.target.value as Currency);
+  };
+
+  const convertedAmount = (amount / exchangeRates[fromCurrency]) * exchangeRates[toCurrency];
 
   return (
-    <>
+    <div>
+      <h1>Currency Converter</h1>
+      <label htmlFor="amount">
+        Amount:
+        <input id="amount" type="number" value={amount} onChange={handleAmountInput} />
+      </label>
+      <label>
+        From:
+        <select value={fromCurrency} onChange={handleFromCurrencySelect}>
+          {Object.keys(exchangeRates).map((currency) => (
+            <option key={currency} value={currency}>
+              {currency}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label>
+        To:
+        <select value={toCurrency} onChange={handleToCurrencySelect}>
+          {Object.keys(exchangeRates).map((currency) => (
+            <option key={currency} value={currency}>
+              {currency}
+            </option>
+          ))}
+        </select>
+      </label>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        Converted amount:
+        {convertedAmount.toFixed(2)} {toCurrency}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
