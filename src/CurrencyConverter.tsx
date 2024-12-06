@@ -1,3 +1,13 @@
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 
 type Currency = 'USD' | 'EUR' | 'RUB';
@@ -18,11 +28,11 @@ const CurrencyConverter = () => {
     if (value === '' || !isNaN(Number(value))) setAmount(value === '' ? 0 : Number(value));
   };
 
-  const handleFromCurrencySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleFromCurrencySelect = (e: SelectChangeEvent<'USD' | 'EUR' | 'RUB'>) => {
     setFromCurrency(e.target.value as Currency);
   };
 
-  const handleToCurrencySelect = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleToCurrencySelect = (e: SelectChangeEvent<'USD' | 'EUR' | 'RUB'>) => {
     setToCurrency(e.target.value as Currency);
   };
 
@@ -30,42 +40,50 @@ const CurrencyConverter = () => {
   const validConvertedAmount = Math.max(0, convertedAmount);
 
   return (
-    <div>
-      <label htmlFor="amount">
-        Amount:
-        <input
-          id="amount"
-          type="number"
-          value={amount === 0 ? '' : amount}
-          onChange={handleAmountInput}
-          placeholder="Enter value..."
-        />
-      </label>
-      <label>
-        From:
-        <select value={fromCurrency} onChange={handleFromCurrencySelect}>
+    <Box>
+      <TextField
+        label="Amount"
+        type="number"
+        value={amount === 0 ? '' : amount}
+        onChange={handleAmountInput}
+        placeholder="Enter value..."
+        sx={{ marginBottom: 3, width: '100%' }}
+      />
+      <FormControl fullWidth sx={{ marginBottom: 2 }}>
+        <InputLabel>From</InputLabel>
+        <Select value={fromCurrency} onChange={handleFromCurrencySelect} label="From">
           {Object.keys(exchangeRates).map((currency) => (
-            <option key={currency} value={currency}>
+            <MenuItem key={currency} value={currency}>
               {currency}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-      </label>
-      <label>
-        To:
-        <select value={toCurrency} onChange={handleToCurrencySelect}>
+        </Select>
+      </FormControl>
+      <FormControl fullWidth sx={{ marginBottom: 2 }}>
+        <InputLabel>To</InputLabel>
+        <Select value={toCurrency} onChange={handleToCurrencySelect} label="To">
           {Object.keys(exchangeRates).map((currency) => (
-            <option key={currency} value={currency}>
+            <MenuItem key={currency} value={currency}>
               {currency}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-      </label>
-      <div>
-        Converted amount:
-        {validConvertedAmount.toFixed(2)} {toCurrency}
-      </div>
-    </div>
+        </Select>
+      </FormControl>
+      <Box
+        sx={{
+          p: 2,
+          mt: 3,
+          textAlign: 'center',
+          fontSize: '1.5rem',
+          background: 'linear-gradient(135deg, #bdd7ff, #c3cfe2)',
+          borderRadius: 2,
+        }}
+      >
+        <Typography variant="h6" component="h2" sx={{ color: '#404040' }}>
+          Converted amount: {validConvertedAmount.toFixed(2)} {toCurrency}
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 
