@@ -6,8 +6,7 @@ const App = () => {
     <Card
       sx={{
         maxWidth: 400,
-        width: 400,
-        padding: 3,
+        padding: 5,
         boxShadow: 3,
         borderRadius: '15px',
         textAlign: 'center',

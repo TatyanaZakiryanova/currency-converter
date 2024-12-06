@@ -74,7 +74,6 @@ const CurrencyConverter = () => {
           p: 2,
           mt: 3,
           textAlign: 'center',
-          fontSize: '1.5rem',
           background: 'linear-gradient(135deg, #bdd7ff, #c3cfe2)',
           borderRadius: 2,
         }}
