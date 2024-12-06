@@ -78,7 +78,7 @@ const CurrencyConverter = () => {
           borderRadius: 2,
         }}
       >
-        <Typography variant="h6" component="h2" sx={{ color: '#404040' }}>
+        <Typography component="h2" sx={{ color: '#404040', fontSize: '20px' }}>
           Converted amount: {validConvertedAmount.toFixed(2)} {toCurrency}
         </Typography>
       </Box>

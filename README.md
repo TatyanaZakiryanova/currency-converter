@@ -6,7 +6,7 @@
 
 [Deploy]
 
-<img src="./src/assets/converterPreview.png" alt="preview" />
+<img src="./src/assets/converterPreview.png" alt="preview">
 
 ## Technologies Used
 
