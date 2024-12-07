@@ -6,6 +6,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
@@ -18,17 +19,21 @@ const CurrencyConverter = () => {
   const [rates, setRates] = useState<Rates>({});
   const [fromCurrency, setFromCurrency] = useState<string>('USD');
   const [toCurrency, setToCurrency] = useState<string>('EUR');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://v6.exchangerate-api.com/v6/460b6f3df688ca4bbb39ac9e/latest/USD',
-        );
+        const API_KEY = import.meta.env.VITE_EXCHANGE_RATES_API_KEY;
+        const response = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`);
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}`);
+        }
         const data = await response.json();
         setRates(data.conversion_rates);
       } catch {
         console.error('API Error');
+        setError('Failed to load data.');
       }
     };
     fetchData();
@@ -105,6 +110,14 @@ const CurrencyConverter = () => {
             </Typography>
           </Box>
         </>
+      )}
+      {error && (
+        <Snackbar
+          open={Boolean(error)}
+          autoHideDuration={4000}
+          onClose={() => setError(null)}
+          message={error}
+        />
       )}
     </Box>
   );
