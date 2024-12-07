@@ -23,7 +23,7 @@ in the project directory enter:
 npm install
 ```
 
-and then run:
+and then run in dev mode:
 
 ```js
 npm run dev
@@ -33,4 +33,10 @@ build the project:
 
 ```js
 npm run build
+```
+
+production mode:
+
+```js
+npm run preview
 ```
