@@ -12,8 +12,8 @@
 
 - Typescript
 - React
-- ExchangeRate-API
 - Material UI
+- ExchangeRate-API
 
 ## How to start project
 
