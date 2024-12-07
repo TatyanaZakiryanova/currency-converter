@@ -1,6 +1,6 @@
 # Currency Converter
 
-Конвертер валют с фиксированным курсом обмена.
+Конвертер валют.
 
 ## Deployment & Live Demo
 
@@ -12,6 +12,7 @@
 
 - Typescript
 - React
+- ExchangeRate-API
 - Material UI
 
 ## How to start project

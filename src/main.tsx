@@ -7,6 +7,16 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Poppins", "Arial", sans-serif',
   },
+  components: {
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          maxHeight: 200,
+          overflowY: 'auto',
+        },
+      },
+    },
+  },
 });
 
 createRoot(document.getElementById('root')!).render(
