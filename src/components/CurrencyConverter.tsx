@@ -11,8 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
-
-type Rates = Record<string, number>;
+import { Rates } from './types';
 
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState<number>(0);
@@ -31,9 +30,9 @@ const CurrencyConverter = () => {
         }
         const data = await response.json();
         setRates(data.conversion_rates);
-      } catch {
-        console.error('API Error');
-        setError('Failed to load data.');
+      } catch (error) {
+        console.error(error);
+        setError((error as Error).message);
       }
     };
     fetchData();

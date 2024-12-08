@@ -1,5 +1,5 @@
 import { Card, Typography } from '@mui/material';
-import CurrencyConverter from './CurrencyConverter';
+import CurrencyConverter from './components/CurrencyConverter';
 
 const App = () => {
   return (
