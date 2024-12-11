@@ -4,7 +4,7 @@
 
 ## Deployment & Live Demo
 
-[Deploy](https://tatyanazakiryanova.github.io/Currency-Converter)
+[Deploy](https://tatyanazakiryanova.github.io/currency-converter)
 
 <img src="./src/assets/converterPreview.png" alt="preview">
 

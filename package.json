@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://tatyanazakiryanova.github.io/Currency-Converter",
+  "homepage": "https://tatyanazakiryanova.github.io/currency-converter",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
