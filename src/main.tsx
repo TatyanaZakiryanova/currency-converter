@@ -1,11 +1,13 @@
+import { createTheme, ThemeProvider } from '@mui/material';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+
 import App from './App';
-import { createTheme, ThemeProvider } from '@mui/material';
 
 const theme = createTheme({
   typography: {
     fontFamily: '"Poppins", "Arial", sans-serif',
+    fontSize: 12,
   },
   components: {
     MuiMenu: {

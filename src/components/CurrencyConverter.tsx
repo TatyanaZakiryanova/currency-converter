@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Card,
   CircularProgress,
   FormControl,
   InputLabel,
@@ -12,8 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Rates } from './types';
+
 import CurrencyHistoryChart from './CurrencyHistoryChart';
+import { Rates } from './types';
+import CurrencyTable from './CurrencyTable';
 
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState<number>(0);
@@ -60,78 +63,113 @@ const CurrencyConverter = () => {
   const validConvertedAmount = Math.max(0, convertedAmount);
 
   return (
-    <Box>
-      {Object.keys(rates).length === 0 ? (
-        <Box
-          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}
-        >
-          <CircularProgress />
-        </Box>
-      ) : (
-        <>
-          <TextField
-            label="Amount"
-            type="number"
-            value={amount === 0 ? '' : amount}
-            onChange={handleAmountInput}
-            placeholder="Enter value..."
-            sx={{ width: '100%', marginY: 2 }}
-          />
-          <FormControl fullWidth sx={{ marginY: 1 }}>
-            <InputLabel>From</InputLabel>
-            <Select value={fromCurrency} onChange={handleFromCurrencySelect} label="From">
-              {Object.keys(rates).map((currency) => (
-                <MenuItem key={currency} value={currency}>
-                  {currency}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth sx={{ marginY: 1 }}>
-            <InputLabel>To</InputLabel>
-            <Select value={toCurrency} onChange={handleToCurrencySelect} label="To">
-              {Object.keys(rates).map((currency) => (
-                <MenuItem key={currency} value={currency}>
-                  {currency}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Button
-            variant="outlined"
-            sx={{ marginY: 1 }}
-            onClick={() => {
-              setFromCurrency(toCurrency);
-              setToCurrency(fromCurrency);
-            }}
-          >
-            Swap Currencies
-          </Button>
+    <>
+      <Card
+        sx={{
+          maxWidth: 600,
+          padding: 5,
+          margin: 3,
+          boxShadow: 3,
+          borderRadius: '15px',
+          textAlign: 'center',
+        }}
+      >
+        <Typography variant="h6" component="h1" sx={{ color: '#575757' }} gutterBottom>
+          Currency converter
+        </Typography>
+        {Object.keys(rates).length === 0 ? (
           <Box
             sx={{
-              p: 2,
-              marginY: 1,
-              textAlign: 'center',
-              background: 'linear-gradient(135deg, #bdd7ff, #c3cfe2)',
-              borderRadius: 2,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100px',
             }}
           >
-            <Typography component="h2" sx={{ color: '#404040', fontSize: '20px' }}>
-              Converted amount: {validConvertedAmount.toFixed(2)} {toCurrency}
-            </Typography>
+            <CircularProgress />
           </Box>
-          <CurrencyHistoryChart fromCurrency={fromCurrency} toCurrency={toCurrency} />
-        </>
-      )}
-      {error && (
-        <Snackbar
-          open={Boolean(error)}
-          autoHideDuration={4000}
-          onClose={() => setError(null)}
-          message={error}
-        />
-      )}
-    </Box>
+        ) : (
+          <>
+            <TextField
+              label="Amount"
+              type="number"
+              value={amount === 0 ? '' : amount}
+              onChange={handleAmountInput}
+              placeholder="Enter value..."
+              sx={{ width: '100%', marginY: 2 }}
+            />
+            <FormControl fullWidth sx={{ marginY: 1 }}>
+              <InputLabel>From</InputLabel>
+              <Select value={fromCurrency} onChange={handleFromCurrencySelect} label="From">
+                {Object.keys(rates).map((currency) => (
+                  <MenuItem key={currency} value={currency}>
+                    {currency}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth sx={{ marginY: 1 }}>
+              <InputLabel>To</InputLabel>
+              <Select value={toCurrency} onChange={handleToCurrencySelect} label="To">
+                {Object.keys(rates).map((currency) => (
+                  <MenuItem key={currency} value={currency}>
+                    {currency}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Button
+              variant="outlined"
+              sx={{ marginY: 1 }}
+              onClick={() => {
+                setFromCurrency(toCurrency);
+                setToCurrency(fromCurrency);
+              }}
+            >
+              Swap Currencies
+            </Button>
+            <Box
+              sx={{
+                p: 2,
+                marginY: 1,
+                textAlign: 'center',
+                background: 'linear-gradient(135deg, #bdd7ff, #c3cfe2)',
+                borderRadius: 2,
+              }}
+            >
+              <Typography component="h3" variant="h6" sx={{ color: '#404040' }}>
+                Converted amount: {validConvertedAmount.toFixed(2)} {toCurrency}
+              </Typography>
+            </Box>
+            <CurrencyHistoryChart fromCurrency={fromCurrency} toCurrency={toCurrency} />
+          </>
+        )}
+        {error && (
+          <Snackbar
+            open={Boolean(error)}
+            autoHideDuration={4000}
+            onClose={() => setError(null)}
+            message={error}
+          />
+        )}
+      </Card>
+      <Card
+        sx={{
+          maxWidth: 600,
+          height: '100%',
+          padding: 5,
+          margin: 3,
+          boxShadow: 3,
+          borderRadius: '15px',
+          textAlign: 'center',
+        }}
+      >
+        <Typography variant="h6" component="h2" sx={{ color: '#575757' }} gutterBottom>
+          Rates of popular currencies (to USD)
+        </Typography>
+        <CurrencyTable rates={rates} />
+      </Card>
+    </>
   );
 };
 

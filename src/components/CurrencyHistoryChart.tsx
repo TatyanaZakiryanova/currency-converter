@@ -1,5 +1,5 @@
+import { Box, Snackbar, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { IHistoricalData } from './types';
 import {
   CartesianGrid,
   Line,
@@ -9,7 +9,8 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { Box, Snackbar, Typography } from '@mui/material';
+
+import { IHistoricalData } from './types';
 import { getLastThreeDays } from './utils';
 
 const CurrencyHistoryChart = ({
@@ -29,7 +30,7 @@ const CurrencyHistoryChart = ({
         const dates = getLastThreeDays();
         const fetchedData = [];
 
-        for (let date of dates) {
+        for (const date of dates) {
           const response = await fetch(
             `https://v6.exchangerate-api.com/v6/${API_KEY}/history/${fromCurrency}/${date}`,
           );
