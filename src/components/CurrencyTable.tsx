@@ -1,13 +1,14 @@
 import {
+  CircularProgress,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  CircularProgress,
 } from '@mui/material';
+
 import { Rates } from './types';
 
 const CurrencyTable = ({ rates }: { rates: Rates }) => {

@@ -15,8 +15,8 @@ import {
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import CurrencyHistoryChart from './CurrencyHistoryChart';
-import { Rates } from './types';
 import CurrencyTable from './CurrencyTable';
+import { Rates } from './types';
 
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState<number>(0);
