@@ -10,6 +10,7 @@ import {
   YAxis,
 } from 'recharts';
 import { Box, Snackbar, Typography } from '@mui/material';
+import { getLastThreeDays } from './utils';
 
 const CurrencyHistoryChart = ({
   fromCurrency,
@@ -25,7 +26,7 @@ const CurrencyHistoryChart = ({
     const fetchHistoricalData = async () => {
       try {
         const API_KEY = import.meta.env.VITE_EXCHANGE_RATES_API_KEY;
-        const dates = ['2024/12/11', '2024/12/12', '2024/12/13'];
+        const dates = getLastThreeDays();
         const fetchedData = [];
 
         for (let date of dates) {
