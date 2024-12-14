@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Rates } from './types';
+import CurrencyHistoryChart from './CurrencyHistoryChart';
 
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState<number>(0);
@@ -33,7 +34,7 @@ const CurrencyConverter = () => {
         setRates(data.conversion_rates);
       } catch (error) {
         console.error(error);
-        setError((error as Error).message);
+        setError(error instanceof Error ? error.message : 'An unknown error occurred');
       }
     };
     fetchData();
@@ -119,6 +120,7 @@ const CurrencyConverter = () => {
               Converted amount: {validConvertedAmount.toFixed(2)} {toCurrency}
             </Typography>
           </Box>
+          <CurrencyHistoryChart />
         </>
       )}
       {error && (
