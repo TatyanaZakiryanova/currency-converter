@@ -23,9 +23,11 @@ const CurrencyConverter = () => {
   const [rates, setRates] = useState<Rates>({});
   const [fromCurrency, setFromCurrency] = useState<string>('USD');
   const [toCurrency, setToCurrency] = useState<string>('EUR');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       try {
         const API_KEY = import.meta.env.VITE_EXCHANGE_RATES_API_KEY;
@@ -38,6 +40,8 @@ const CurrencyConverter = () => {
       } catch (error) {
         console.error(error);
         setError(error instanceof Error ? error.message : 'An unknown error occurred');
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -77,7 +81,7 @@ const CurrencyConverter = () => {
         <Typography variant="h6" component="h1" sx={{ color: '#575757' }} gutterBottom>
           Currency converter
         </Typography>
-        {Object.keys(rates).length === 0 ? (
+        {isLoading ? (
           <Box
             sx={{
               display: 'flex',
@@ -120,7 +124,7 @@ const CurrencyConverter = () => {
             </FormControl>
             <Button
               variant="outlined"
-              sx={{ marginY: 1 }}
+              sx={{ margin: 1 }}
               onClick={() => {
                 setFromCurrency(toCurrency);
                 setToCurrency(fromCurrency);
@@ -153,22 +157,9 @@ const CurrencyConverter = () => {
           />
         )}
       </Card>
-      <Card
-        sx={{
-          maxWidth: 600,
-          height: '100%',
-          padding: 5,
-          margin: 3,
-          boxShadow: 3,
-          borderRadius: '15px',
-          textAlign: 'center',
-        }}
-      >
-        <Typography variant="h6" component="h2" sx={{ color: '#575757' }} gutterBottom>
-          Rates of popular currencies (to USD)
-        </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CurrencyTable rates={rates} />
-      </Card>
+      </Box>
     </>
   );
 };

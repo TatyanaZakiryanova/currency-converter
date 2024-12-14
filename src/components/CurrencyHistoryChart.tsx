@@ -11,7 +11,6 @@ import {
 } from 'recharts';
 
 import { IHistoricalData } from './types';
-import { getLastThreeDays } from './utils';
 
 const CurrencyHistoryChart = ({
   fromCurrency,
@@ -21,13 +20,15 @@ const CurrencyHistoryChart = ({
   toCurrency: string;
 }) => {
   const [historicalData, setHistoricalData] = useState<IHistoricalData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchHistoricalData = async () => {
       try {
         const API_KEY = import.meta.env.VITE_EXCHANGE_RATES_API_KEY;
-        const dates = getLastThreeDays();
+        const dates = ['2024/12/11', '2024/12/12', '2024/12/13'];
         const fetchedData = [];
 
         for (const date of dates) {
@@ -49,6 +50,8 @@ const CurrencyHistoryChart = ({
       } catch (error) {
         console.error(error);
         setError(error instanceof Error ? error.message : 'An unknown error occurred');
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -58,7 +61,7 @@ const CurrencyHistoryChart = ({
   return (
     <Box sx={{ marginTop: 4 }}>
       <Typography variant="h6">History chart</Typography>
-      {Object.keys(historicalData).length === 0 ? (
+      {isLoading ? (
         <CircularProgress sx={{ marginTop: 3 }} />
       ) : (
         <ResponsiveContainer width="100%" height={300}>
