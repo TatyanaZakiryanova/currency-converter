@@ -11,7 +11,13 @@ import {
 } from 'recharts';
 import { Box, Snackbar, Typography } from '@mui/material';
 
-const CurrencyHistoryChart = () => {
+const CurrencyHistoryChart = ({
+  fromCurrency,
+  toCurrency,
+}: {
+  fromCurrency: string;
+  toCurrency: string;
+}) => {
   const [historicalData, setHistoricalData] = useState<IHistoricalData[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,18 +25,18 @@ const CurrencyHistoryChart = () => {
     const fetchHistoricalData = async () => {
       try {
         const API_KEY = import.meta.env.VITE_EXCHANGE_RATES_API_KEY;
-        const dates = ['2023/12/11', '2023/12/12', '2023/12/13'];
+        const dates = ['2024/12/11', '2024/12/12', '2024/12/13'];
         const fetchedData = [];
 
         for (let date of dates) {
           const response = await fetch(
-            `https://v6.exchangerate-api.com/v6/${API_KEY}/history/USD/${date}`,
+            `https://v6.exchangerate-api.com/v6/${API_KEY}/history/${fromCurrency}/${date}`,
           );
           if (!response.ok) {
             throw new Error(`Failed to fetch history chart for date: ${date}`);
           }
           const data = await response.json();
-          const rate = data.conversion_rates['EUR'];
+          const rate = data.conversion_rates[toCurrency];
           fetchedData.push({
             date: date.split('/').reverse().join('-'),
             rate: rate,
@@ -45,7 +51,7 @@ const CurrencyHistoryChart = () => {
     };
 
     fetchHistoricalData();
-  }, []);
+  }, [fromCurrency, toCurrency]);
 
   return (
     <Box sx={{ marginTop: 4 }}>

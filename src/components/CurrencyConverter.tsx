@@ -120,7 +120,7 @@ const CurrencyConverter = () => {
               Converted amount: {validConvertedAmount.toFixed(2)} {toCurrency}
             </Typography>
           </Box>
-          <CurrencyHistoryChart />
+          <CurrencyHistoryChart fromCurrency={fromCurrency} toCurrency={toCurrency} />
         </>
       )}
       {error && (
