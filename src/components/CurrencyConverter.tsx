@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   CircularProgress,
   FormControl,
   InputLabel,
@@ -73,9 +74,9 @@ const CurrencyConverter = () => {
             value={amount === 0 ? '' : amount}
             onChange={handleAmountInput}
             placeholder="Enter value..."
-            sx={{ marginBottom: 3, width: '100%' }}
+            sx={{ width: '100%', marginY: 2 }}
           />
-          <FormControl fullWidth sx={{ marginBottom: 2 }}>
+          <FormControl fullWidth sx={{ marginY: 1 }}>
             <InputLabel>From</InputLabel>
             <Select value={fromCurrency} onChange={handleFromCurrencySelect} label="From">
               {Object.keys(rates).map((currency) => (
@@ -85,7 +86,7 @@ const CurrencyConverter = () => {
               ))}
             </Select>
           </FormControl>
-          <FormControl fullWidth sx={{ marginBottom: 2 }}>
+          <FormControl fullWidth sx={{ marginY: 1 }}>
             <InputLabel>To</InputLabel>
             <Select value={toCurrency} onChange={handleToCurrencySelect} label="To">
               {Object.keys(rates).map((currency) => (
@@ -95,10 +96,20 @@ const CurrencyConverter = () => {
               ))}
             </Select>
           </FormControl>
+          <Button
+            variant="outlined"
+            sx={{ marginY: 1 }}
+            onClick={() => {
+              setFromCurrency(toCurrency);
+              setToCurrency(fromCurrency);
+            }}
+          >
+            Swap Currencies
+          </Button>
           <Box
             sx={{
               p: 2,
-              mt: 3,
+              marginY: 1,
               textAlign: 'center',
               background: 'linear-gradient(135deg, #bdd7ff, #c3cfe2)',
               borderRadius: 2,
