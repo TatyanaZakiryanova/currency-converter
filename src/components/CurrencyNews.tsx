@@ -1,4 +1,4 @@
-import { Card, List, ListItem, Typography } from '@mui/material';
+import { Box, Card, List, ListItem, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { NewsArticle } from './types';
 
@@ -28,40 +28,47 @@ const CurrencyNews = () => {
     <Card
       sx={{
         maxWidth: 600,
-        maxHeight: 300,
-        overflow: 'auto',
+        maxHeight: 350,
+        overflow: 'hidden',
         padding: 5,
-        margin: 3,
+        margin: 2,
         boxShadow: 3,
         borderRadius: '15px',
         textAlign: 'center',
       }}
     >
-      <Typography variant="h6" sx={{ color: '#575757' }}>
-        Currency news
-      </Typography>
-      <List>
-        {news.length > 0 ? (
-          news.map((article, index) => (
-            <ListItem
-              key={index}
-              sx={{
-                fontSize: '10px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-              }}
-            >
-              <a href={article.url} target="_blank" rel="noopener noreferrer">
-                <Typography>{article.title}</Typography>
-              </a>
-              <Typography>{article.description.slice(0, 150) + '...'}</Typography>
-            </ListItem>
-          ))
-        ) : (
-          <Typography variant="body2">No news available.</Typography>
-        )}
-      </List>
+      <Box
+        sx={{
+          height: '100%',
+          overflowY: 'auto',
+        }}
+      >
+        <Typography variant="h6" sx={{ color: '#575757' }}>
+          Currency news
+        </Typography>
+        <List>
+          {news.length > 0 ? (
+            news.map((article, index) => (
+              <ListItem
+                key={index}
+                sx={{
+                  fontSize: '10px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <a href={article.url} target="_blank" rel="noopener noreferrer">
+                  <Typography>{article.title}</Typography>
+                </a>
+                <Typography>{article.description.slice(0, 150) + '...'}</Typography>
+              </ListItem>
+            ))
+          ) : (
+            <Typography variant="body2">No news available.</Typography>
+          )}
+        </List>
+      </Box>
     </Card>
   );
 };

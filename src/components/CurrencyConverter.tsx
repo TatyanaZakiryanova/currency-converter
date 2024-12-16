@@ -72,8 +72,8 @@ const CurrencyConverter = () => {
       <Card
         sx={{
           maxWidth: 600,
+          margin: 2,
           padding: 5,
-          margin: 3,
           boxShadow: 3,
           borderRadius: '15px',
           textAlign: 'center',
