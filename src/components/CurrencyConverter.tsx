@@ -17,6 +17,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import CurrencyHistoryChart from './CurrencyHistoryChart';
 import CurrencyTable from './CurrencyTable';
 import { Rates } from './types';
+import CurrencyNews from './CurrencyNews';
 
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState<number>(0);
@@ -159,6 +160,7 @@ const CurrencyConverter = () => {
       </Card>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CurrencyTable rates={rates} />
+        <CurrencyNews />
       </Box>
     </>
   );

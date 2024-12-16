@@ -25,7 +25,7 @@ const CurrencyTable = ({ rates }: { rates: Rates }) => {
     <Card
       sx={{
         maxWidth: 600,
-        height: '100%',
+        maxHeight: 300,
         overflow: 'auto',
         padding: 5,
         margin: 3,
