@@ -40,7 +40,7 @@ const CurrencyConverter = () => {
         setRates(data.conversion_rates);
       } catch (error) {
         console.error(error);
-        setError(error instanceof Error ? error.message : 'An unknown error occurred');
+        setError('Error loading currency rates');
       } finally {
         setIsLoading(false);
       }

@@ -24,7 +24,7 @@ const CurrencyNews = () => {
         setNews(data.articles);
       } catch (error) {
         console.log('Error fetching currency news:', error);
-        setError(error instanceof Error ? error.message : 'An unknown error occured');
+        setError('Error loading news');
       } finally {
         setIsLoading(false);
       }
@@ -76,7 +76,15 @@ const CurrencyNews = () => {
                 </ListItem>
               ))
             ) : (
-              <Typography variant="body2">No news available.</Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography variant="body2">No news available.</Typography>
+              </Box>
             )}
           </List>
         )}

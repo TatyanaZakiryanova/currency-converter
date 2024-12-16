@@ -50,7 +50,7 @@ const CurrencyHistoryChart = ({
         setHistoricalData(fetchedData);
       } catch (error) {
         console.error(error);
-        setError(error instanceof Error ? error.message : 'An unknown error occured');
+        setError('Error loading history');
       } finally {
         setIsLoading(false);
       }
