@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 
 import { IHistoricalData } from './types';
+import { getLastThreeDays } from './utils';
 
 const CurrencyHistoryChart = ({
   fromCurrency,
@@ -28,7 +29,7 @@ const CurrencyHistoryChart = ({
     const fetchHistoricalData = async () => {
       try {
         const API_KEY = import.meta.env.VITE_EXCHANGE_RATES_API_KEY;
-        const dates = ['2024/12/11', '2024/12/12', '2024/12/13'];
+        const dates = getLastThreeDays();
         const fetchedData = [];
 
         for (const date of dates) {
@@ -49,7 +50,7 @@ const CurrencyHistoryChart = ({
         setHistoricalData(fetchedData);
       } catch (error) {
         console.error(error);
-        setError(error instanceof Error ? error.message : 'An unknown error occurred');
+        setError(error instanceof Error ? error.message : 'An unknown error occured');
       } finally {
         setIsLoading(false);
       }

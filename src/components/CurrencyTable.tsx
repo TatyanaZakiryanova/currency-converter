@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import { Rates } from './types';
+import { getTodaysDate } from './utils';
 
 const CurrencyTable = ({ rates }: { rates: Rates }) => {
   const popularCurrencies = ['USD', 'EUR', 'JPY', 'GBP', 'CHF', 'CNY', 'RUB', 'CAD', 'AUD'];
@@ -42,7 +43,7 @@ const CurrencyTable = ({ rates }: { rates: Rates }) => {
         }}
       >
         <Typography variant="h6" component="h2" sx={{ color: '#575757' }} gutterBottom>
-          Rates of popular currencies
+          Rates of popular currencies at {getTodaysDate()}
         </Typography>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 500 }} aria-label="currency table">

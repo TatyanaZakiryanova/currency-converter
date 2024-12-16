@@ -15,9 +15,9 @@ import {
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import CurrencyHistoryChart from './CurrencyHistoryChart';
+import CurrencyNews from './CurrencyNews';
 import CurrencyTable from './CurrencyTable';
 import { Rates } from './types';
-import CurrencyNews from './CurrencyNews';
 
 const CurrencyConverter = () => {
   const [amount, setAmount] = useState<number>(0);
@@ -68,7 +68,11 @@ const CurrencyConverter = () => {
   const validConvertedAmount = Math.max(0, convertedAmount);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+      }}
+    >
       <Card
         sx={{
           maxWidth: 600,
@@ -142,7 +146,7 @@ const CurrencyConverter = () => {
                 borderRadius: 2,
               }}
             >
-              <Typography component="h3" variant="h6" sx={{ color: '#404040' }}>
+              <Typography component="h6" variant="h6" sx={{ color: '#404040' }}>
                 Converted amount: {validConvertedAmount.toFixed(2)} {toCurrency}
               </Typography>
             </Box>
@@ -162,7 +166,7 @@ const CurrencyConverter = () => {
         <CurrencyTable rates={rates} />
         <CurrencyNews />
       </Box>
-    </>
+    </Box>
   );
 };
 

@@ -6,7 +6,7 @@
 
 [Deploy](https://tatyanazakiryanova.github.io/currency-converter)
 
-<img src="./src/assets/converterPreview.png" alt="preview">
+<img src="./src/assets/preview.png" alt="preview">
 
 ## Technologies Used
 
