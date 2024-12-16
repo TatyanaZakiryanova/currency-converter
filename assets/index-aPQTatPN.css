@@ -1,0 +1,1 @@
+html,body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;min-height:100%}body{background:linear-gradient(135deg,#f5f7fa,#c3cfe2)}input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}
