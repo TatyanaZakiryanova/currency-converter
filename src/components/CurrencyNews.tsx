@@ -35,14 +35,18 @@ const CurrencyNews = () => {
   return (
     <Card
       sx={{
-        maxWidth: 600,
-        maxHeight: 350,
+        width: '100%',
+        maxWidth: {
+          xs: '100%',
+          sm: '100%',
+        },
+        maxHeight: 400,
         overflow: 'hidden',
         padding: 5,
-        margin: 2,
         boxShadow: 3,
         borderRadius: '15px',
         textAlign: 'center',
+        boxSizing: 'border-box',
       }}
     >
       <Box
@@ -55,7 +59,11 @@ const CurrencyNews = () => {
           Currency news at {getTodaysDate()}
         </Typography>
         {isLoading ? (
-          <CircularProgress />
+          <Box
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}
+          >
+            <CircularProgress />
+          </Box>
         ) : (
           <List>
             {news.length > 0 ? (

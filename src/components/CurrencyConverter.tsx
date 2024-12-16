@@ -71,16 +71,36 @@ const CurrencyConverter = () => {
     <Box
       sx={{
         display: 'flex',
+        flexDirection: {
+          xs: 'column',
+          sm: 'column',
+          md: 'row',
+        },
+        maxWidth: {
+          xs: 380,
+          sm: 700,
+          md: '100%',
+        },
+        justifyContent: 'space-between',
+        gap: 2,
+        width: '100%',
+        boxSizing: 'border-box',
+        margin: 2,
       }}
     >
       <Card
         sx={{
-          maxWidth: 600,
-          margin: 2,
+          width: '100%',
+          maxWidth: {
+            xs: '100%',
+            sm: '100%',
+            md: '50%',
+          },
           padding: 5,
           boxShadow: 3,
           borderRadius: '15px',
           textAlign: 'center',
+          boxSizing: 'border-box',
         }}
       >
         <Typography variant="h6" component="h1" sx={{ color: '#575757' }} gutterBottom>
@@ -109,7 +129,11 @@ const CurrencyConverter = () => {
             />
             <FormControl fullWidth sx={{ marginY: 1 }}>
               <InputLabel>From</InputLabel>
-              <Select value={fromCurrency} onChange={handleFromCurrencySelect} label="From">
+              <Select
+                value={rates[fromCurrency] ? fromCurrency : ''}
+                onChange={handleFromCurrencySelect}
+                label="From"
+              >
                 {Object.keys(rates).map((currency) => (
                   <MenuItem key={currency} value={currency}>
                     {currency}
@@ -119,7 +143,11 @@ const CurrencyConverter = () => {
             </FormControl>
             <FormControl fullWidth sx={{ marginY: 1 }}>
               <InputLabel>To</InputLabel>
-              <Select value={toCurrency} onChange={handleToCurrencySelect} label="To">
+              <Select
+                value={rates[toCurrency] ? toCurrency : ''}
+                onChange={handleToCurrencySelect}
+                label="To"
+              >
                 {Object.keys(rates).map((currency) => (
                   <MenuItem key={currency} value={currency}>
                     {currency}
@@ -162,7 +190,16 @@ const CurrencyConverter = () => {
           />
         )}
       </Card>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          maxWidth: {
+            md: '50%',
+          },
+        }}
+      >
         <CurrencyTable rates={rates} />
         <CurrencyNews />
       </Box>

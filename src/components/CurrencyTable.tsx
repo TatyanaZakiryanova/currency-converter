@@ -26,14 +26,18 @@ const CurrencyTable = ({ rates }: { rates: Rates }) => {
   return (
     <Card
       sx={{
-        maxWidth: 600,
-        maxHeight: 350,
+        width: '100%',
+        maxWidth: {
+          xs: '100%',
+          sm: '100%',
+        },
+        maxHeight: 400,
         overflow: 'hidden',
         padding: 5,
-        margin: 2,
         boxShadow: 3,
         borderRadius: '15px',
         textAlign: 'center',
+        boxSizing: 'border-box',
       }}
     >
       <Box
