@@ -59,11 +59,7 @@ const CurrencyNews = () => {
           Currency news at {getTodaysDate()}
         </Typography>
         {isLoading ? (
-          <Box
-            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}
-          >
-            <CircularProgress />
-          </Box>
+          <CircularProgress />
         ) : (
           <List>
             {news.length > 0 ? (
@@ -84,15 +80,7 @@ const CurrencyNews = () => {
                 </ListItem>
               ))
             ) : (
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Typography variant="body2">No news available.</Typography>
-              </Box>
+              <Typography variant="body2">No news available.</Typography>
             )}
           </List>
         )}

@@ -77,7 +77,7 @@ const CurrencyConverter = () => {
           md: 'row',
         },
         maxWidth: {
-          xs: 380,
+          xs: 360,
           sm: 700,
           md: '100%',
         },
