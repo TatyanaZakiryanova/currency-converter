@@ -59,7 +59,16 @@ const CurrencyNews = () => {
           Currency news at {getTodaysDate()}
         </Typography>
         {isLoading ? (
-          <CircularProgress />
+          <Box
+            sx={{
+              height: 400,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <CircularProgress />
+          </Box>
         ) : (
           <List>
             {news.length > 0 ? (
