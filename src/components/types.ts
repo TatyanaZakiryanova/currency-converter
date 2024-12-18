@@ -6,7 +6,8 @@ export interface IHistoricalData {
 }
 
 export interface NewsArticle {
-  url: string;
+  article_id: string;
+  link: string;
   title: string;
   description: string;
 }

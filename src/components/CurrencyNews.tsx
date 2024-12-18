@@ -15,18 +15,15 @@ const CurrencyNews = () => {
       try {
         const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=currency&sortBy=publishedAt&pageSize=5&language=en&apiKey=${API_KEY}`,
-          {
-            headers: {
-              Accept: 'application/json',
-            },
-          },
+          `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=finance&language=en`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch news');
         }
         const data = await response.json();
-        setNews(data.articles);
+        const shuffledNews = data.results.sort(() => Math.random() - 0.5);
+        const randomNews = shuffledNews.slice(0, 5);
+        setNews(randomNews);
       } catch (error) {
         console.log('Error fetching currency news:', error);
         setError('Error loading news');
@@ -77,9 +74,9 @@ const CurrencyNews = () => {
         ) : (
           <List>
             {news.length > 0 ? (
-              news.map((article, index) => (
+              news.map((article, article_id) => (
                 <ListItem
-                  key={index}
+                  key={article_id}
                   sx={{
                     fontSize: '10px',
                     display: 'flex',
@@ -87,10 +84,14 @@ const CurrencyNews = () => {
                     alignItems: 'flex-start',
                   }}
                 >
-                  <a href={article.url} target="_blank" rel="noopener noreferrer">
+                  <a href={article.link} target="_blank" rel="noopener noreferrer">
                     <Typography>{article.title}</Typography>
                   </a>
-                  <Typography>{article.description.slice(0, 150) + '...'}</Typography>
+                  <Typography>
+                    {article.description
+                      ? article.description.slice(0, 150) + '...'
+                      : 'No description available'}
+                  </Typography>
                 </ListItem>
               ))
             ) : (

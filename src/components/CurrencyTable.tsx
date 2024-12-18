@@ -52,7 +52,7 @@ const CurrencyTable = ({ rates }: { rates: Rates }) => {
         <TableContainer component={Paper}>
           <Table
             sx={{
-              minWidth: '100%',
+              width: '100%',
             }}
             aria-label="currency table"
           >
