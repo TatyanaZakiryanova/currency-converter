@@ -50,7 +50,12 @@ const CurrencyTable = ({ rates }: { rates: Rates }) => {
           Rates of popular currencies at {getTodaysDate()}
         </Typography>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 500 }} aria-label="currency table">
+          <Table
+            sx={{
+              minWidth: '100%',
+            }}
+            aria-label="currency table"
+          >
             <TableHead>
               <TableRow>
                 <TableCell>Currency</TableCell>

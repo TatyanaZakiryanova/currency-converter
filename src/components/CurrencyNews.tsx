@@ -16,6 +16,11 @@ const CurrencyNews = () => {
         const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
         const response = await fetch(
           `https://newsapi.org/v2/everything?q=currency&sortBy=publishedAt&pageSize=5&language=en&apiKey=${API_KEY}`,
+          {
+            headers: {
+              Accept: 'application/json',
+            },
+          },
         );
         if (!response.ok) {
           throw new Error('Failed to fetch news');
