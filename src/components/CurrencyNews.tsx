@@ -15,7 +15,7 @@ const CurrencyNews = () => {
       try {
         const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
         const response = await fetch(
-          `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=finance&language=en`,
+          `https://newsdata.io/api/1/latest?apikey=${API_KEY}&q=currency&language=en&removeduplicate=1`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch news');
