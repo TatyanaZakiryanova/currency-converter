@@ -1,4 +1,7 @@
-import { Box, CircularProgress, Snackbar, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import Snackbar from '@mui/material/Snackbar';
+import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import {
   CartesianGrid,

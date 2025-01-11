@@ -1,4 +1,10 @@
-import { Box, Card, CircularProgress, List, ListItem, Snackbar, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CircularProgress from '@mui/material/CircularProgress';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Snackbar from '@mui/material/Snackbar';
+import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 
 import { NewsArticle } from './types';
